@@ -1,11 +1,22 @@
 <?php
 
-require __DIR__ . '/vendor/autoload.php';
+require 'vendor/autoload.php';
+include 'bootstrap.php';
 
-$app = new Slim\App;
+use Chatter\Models\Message;
+use Chatter\Middleware\Logging as ChatterLogging;
+use Chatter\Middleware\Authentication as ChatterAuth;
+
+$app = new Slim\App();
+
+$app->add(new ChatterAuth());
+$app->add(new ChatterLogging());
 
 $app->get('/messages', function($request, $response, $args) {
-	return $response->write("messeges");
+	$_message = new Message();
+	$messages = $_message->all();
+
+	return $response->withStatus(200)->withJson($messages);
 });
 
 $app->run();

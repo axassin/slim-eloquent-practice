@@ -1,6 +1,12 @@
 {
     "require": {
         "slim/slim": "^3.0",
-        "illuminate/database": "^5.4"
+        "illuminate/database": "^5.4",
+        "lulco/phoenix": "^0.9.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Chatter\\": "src/Chatter"
+        }
     }
 }
